@@ -1,11 +1,13 @@
 import Foundation
-
 import CoreHaptics
 
 class HapticsManager {
 	var engine: CHHapticEngine?
+
 	init() {
-		guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+		guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+			return
+		}
 		do {
 			self.engine = try CHHapticEngine()
 			try engine?.start()
@@ -14,6 +16,7 @@ class HapticsManager {
 			print("Haptics error: \(error.localizedDescription)")
 		}
 	}
+
 	func epicFail() {
 		guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 		var events = [CHHapticEvent]()
@@ -33,6 +36,7 @@ class HapticsManager {
 			print("Failed to vibraten: \(error.localizedDescription).")
 		}
 	}
+
 	func timedVibrations(numberOfTimes: Int, every: Int, _ withIntensity: Float=1.0, _ withSharpness: Float=1.0) {
 		guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
 		var events = [CHHapticEvent]()
@@ -41,7 +45,7 @@ class HapticsManager {
 		let time: Float = Float(every) / 1000
 		var currentTime: Float=0-time
 		for _ in stride(from: 0, to: numberOfTimes, by: 1) {
-currentTime+=time
+			currentTime += time
 			let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: TimeInterval(currentTime))
 			events.append(event)
 		}
@@ -53,5 +57,4 @@ currentTime+=time
 			print("Failed to vibraten: \(error.localizedDescription).")
 		}
 	}
-
 }
