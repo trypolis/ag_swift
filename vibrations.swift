@@ -33,7 +33,7 @@ class HapticsManager {
 			let player = try engine?.makePlayer(with: pattern)
 			try player?.start(atTime: 0)
 		} catch {
-			print("Failed to vibraten: \(error.localizedDescription).")
+			print("Failed to vibrate: \(error.localizedDescription).")
 		}
 	}
 
@@ -54,7 +54,7 @@ class HapticsManager {
 			let player = try engine?.makePlayer(with: pattern)
 			try player?.start(atTime: 0)
 		} catch {
-			print("Failed to vibraten: \(error.localizedDescription).")
+			print("Failed to vibrate: \(error.localizedDescription).")
 		}
 	}
 }
